@@ -66,23 +66,60 @@ const images = [
 
     
 
-const container = document.querySelector(".images");
-container.innerHTML = createGalleryMarkup(images)
-
-
-function createGalleryMarkup(images) {
-   return images.map(({ preview, original, description }) => `
-    <li class="gallery-item">
-         <a class="gallery-link" href="${original}">
-         <img
-           class="gallery-image"
-           src="${preview}"
-           data-source="${original}"
-           alt="${description}"/>
-         </a>
-    </li>`
-    )
-      .join("");
-  } 
-
-  console.log(createGalleryMarkup(images))
+    const container = document.querySelector("ul.images");
+    container.innerHTML = createImagesMarkup(images);
+    
+    function createImagesMarkup(images) {
+      return images
+        .map(({ original, preview, description }) => {
+          return `<li class="gallery-item">
+      <a class="gallery-link" href="${original}">
+        <img
+          class="gallery-image"
+          src="${preview}"
+          data-source="${original}"
+          alt="${description}"
+        />
+      </a>
+    </li>`;
+        })
+        .join('');
+    }
+    
+    console.log(createImagesMarkup(images));
+    
+    // galleryContainer.insertAdjacentHTML('beforeend', galleryCardsSet);
+    // galleryContainer.addEventListener('click', selectGalleryEl);
+    
+    // function selectGalleryEl(event) {
+    //   event.preventDefault();
+    //   if (event.target.nodeName !== 'IMG') {
+    //     return;
+    //   }
+    //   const instance = basicLightbox.create(
+    //     `<img src="${event.target.dataset.source}" width="800" height="600" style= "border-radius: 5%; box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    //     7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1)">`,
+    
+    //     {
+    //       onShow: () => {
+    //         window.addEventListener('keydown', onKeydownEsc);
+    //       },
+    //       onClose: () => {
+    //         window.removeEventListener('keydown', onKeydownEsc);
+    //       },
+    //     },
+    //   );
+    
+    //   // instance.show();
+    
+    //   const onKeydownEsc = event => {
+    //     console.log(event.code);
+    //     if (event.code === 'Escape') {
+    //       instance.close();
+    //     }
+    //   };
+    //   // window.addEventListener('keydown', onKeydownEsc);
+    //   // window.removeEventListener('keydown', onKeydownEsc);
+    
+    //   instance.show();
+    // }
