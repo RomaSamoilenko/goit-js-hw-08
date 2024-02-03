@@ -35,5 +35,5 @@
   }
   
   .gallery-link:hover {
-    cursor: grab;
+    cursor: url(../img/bxs_hand-down.svg), zoom-in;
   }
