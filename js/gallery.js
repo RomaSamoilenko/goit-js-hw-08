@@ -85,5 +85,32 @@ const images = [
         })
         .join('');
     }
+
+    galleryContainer.insertAdjacentHTML('beforeend', galleryCardsSet);
+    galleryContainer.addEventListener('click', selectGalleryEl);
     
-   
+    function selectGalleryEl(event) {
+      event.preventDefault();
+      if (event.target.nodeName !== 'IMG') {
+        return;
+      }
+      const instance = basicLightbox.create(
+        `<img src="${event.target.dataset.source}" width="800" height="600">`,
+    
+        {
+          onShow: () => {
+            window.addEventListener('keydown', onKeydownEsc);
+          },
+          onClose: () => {
+            window.removeEventListener('keydown', onKeydownEsc);
+          },
+        },
+      );
+      const onKeydownEsc = event => {
+        console.log(event.code);
+        if (event.code === 'Escape') {
+          instance.close();
+        }
+      };
+      instance.show();
+    }
